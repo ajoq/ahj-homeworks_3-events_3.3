@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+
 export default class Gallery {
   constructor() {
     this.form = document.getElementById('form');
@@ -9,8 +11,8 @@ export default class Gallery {
   }
 
   events() {
-    this.form.addEventListener('submit', (e) => this.formSubmit(e));
-    this.images.addEventListener('click', (e) => Gallery.deleteImage(e));
+    this.form.addEventListener('submit', this.formSubmit.bind(this));
+    this.images.addEventListener('click', this.deleteImage.bind(this));
   }
 
   addImage(name, url) {
@@ -42,7 +44,7 @@ export default class Gallery {
     };
   }
 
-  static deleteImage(e) {
+  deleteImage(e) {
     const del = e.target.closest('.images-item__del');
     const img = e.target.closest('.images-item');
     if (!del) return;
